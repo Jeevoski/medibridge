@@ -370,18 +370,6 @@ For production, change `VITE_API_URL` to your deployed backend URL on Render.
 
 ---
 
-## 📹 Demo Video Script (2 minutes)
-
-**0:00–0:20** — Problem intro: "Doctors waste time on notes. Patients don't understand prescriptions."
-
-**0:20–0:50** — Show Doctor Mode: type a consultation summary → click Generate → show SOAP note output → click Export PDF
-
-**0:50–1:30** — Show Patient Mode: upload prescription photo → toggle to Hindi → click Explain → show medicine-by-medicine cards
-
-**1:30–2:00** — Close with impact: "Built with Gemma 4 multimodal vision. Works on any device. Private by design."
-
----
-
 ## 📝 Technical Write-Up Outline (for Kaggle submission)
 
 1. **Problem** — Healthcare gap in rural/semi-urban regions
@@ -409,9 +397,6 @@ dist/
 
 **Phulkeshwar Mahto**
 B.Tech Computer Engineering, NIAMT Ranchi
-GitHub: [your-github-username]
-Kaggle: [your-kaggle-username]
-
 ---
 
 *Built with ❤️ using Gemma 4 for the Gemma 4 Good Hackathon — Kaggle × Google DeepMind, April 2026*
