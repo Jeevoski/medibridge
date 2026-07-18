@@ -50,7 +50,7 @@ Google's Gemma 4 is integrated into the core endpoints of the Medibridge Express
 ---
 
 ## Proof of Google AI Usage
-Proof documents, logs, and verification outputs are located in the `/proofs` folder.
+https://drive.google.com/file/d/1ofGLDlbASoaFLtx8OJeTxekyCN5fURok/view?usp=sharing
 
 ---
 
@@ -60,6 +60,9 @@ Below are screenshots demonstrating the application's interface:
 https://drive.google.com/file/d/1dZwKfYhkj0cvmeV6gWqHerTjSouh7aCp/view?usp=sharing
 https://drive.google.com/file/d/1nd8qMxhq_kUSAlJyxHLUKpTLBGsPTlpS/view?usp=sharing
 https://drive.google.com/file/d/1Q-RXPonBAnIWLrxjNW9-cFfLeukhCYN_/view?usp=sharing
+https://drive.google.com/file/d/1anlF0jXCRyZ70zdy1w8I02qalsRe7ISO/view?usp=sharing
+https://drive.google.com/file/d/1mboWCvbj5JHCwtmW0EYP1Xt1Zhi1tJsM/view?usp=sharing
+https://drive.google.com/file/d/1aFRHAizsfi1ES1RhBZxJGH2IoqkCbwwK/view?usp=sharing
 ---
 
 ## Demo Video
