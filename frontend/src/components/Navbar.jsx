@@ -6,7 +6,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <span style={{ fontSize: '1.875rem' }}>🩺</span>
             <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A2463' }}>
-              MedScribe AI
+              Medibridge
             </h1>
           </div>
           <p style={{ fontSize: '0.875rem', color: '#4b5563' }}>Powered by Gemma 4</p>

@@ -1,22 +1,3 @@
-# MedScribe AI 🏥
-### AI-Powered Clinical Assistant — Built for the Gemma 4 Good Hackathon (Kaggle × Google DeepMind)
-
-> A privacy-first, multimodal health assistant that helps **doctors generate structured clinical notes** and helps **patients understand their prescriptions** — powered by Google's Gemma 4 model.
-
----
-
-## 📌 Hackathon Info
-
-| Field | Detail |
-|---|---|
-| Competition | [Gemma 4 Good Hackathon](https://www.kaggle.com/competitions/gemma-4-good-hackathon) |
-| Track | Health & Sciences |
-| Prize Pool | $200,000 USD |
-| Deadline | May 18, 2026 (23:59 UTC) |
-| Model Used | Gemma 4 27B (via Google AI Studio) |
-
----
-
 ## 🧠 Problem Statement
 
 In rural and semi-urban India (and globally):

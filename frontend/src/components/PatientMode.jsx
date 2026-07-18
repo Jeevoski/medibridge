@@ -84,7 +84,7 @@ export default function PatientMode() {
 
       {explanation && (
         <div style={{ backgroundColor: 'white', borderRadius: '0.75rem', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', padding: '2rem' }}>
-          <RxExplanation explanation={explanation} />
+          <RxExplanation explanation={explanation} language={language} />
         </div>
       )}
     </div>

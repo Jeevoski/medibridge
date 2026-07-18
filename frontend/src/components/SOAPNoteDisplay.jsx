@@ -6,10 +6,10 @@ const parseSoapNote = (text) => {
     plan: "",
   };
 
-  const subjPattern = /SUBJECTIVE:?\s*\n?(.*?)(?=OBJECTIVE:|$)/is;
-  const objPattern = /OBJECTIVE:?\s*\n?(.*?)(?=ASSESSMENT:|$)/is;
-  const assPattern = /ASSESSMENT:?\s*\n?(.*?)(?=PLAN:|$)/is;
-  const planPattern = /PLAN:?\s*\n?(.*?)$/is;
+  const subjPattern = /(?:\*\*|###)?\s*SUBJECTIVE\s*(?:\*\*|:)?\s*\n?([\s\S]*?)(?=(?:\*\*|###)?\s*OBJECTIVE\b|$)/is;
+  const objPattern = /(?:\*\*|###)?\s*OBJECTIVE\s*(?:\*\*|:)?\s*\n?([\s\S]*?)(?=(?:\*\*|###)?\s*ASSESSMENT\b|$)/is;
+  const assPattern = /(?:\*\*|###)?\s*ASSESSMENT\s*(?:\*\*|:)?\s*\n?([\s\S]*?)(?=(?:\*\*|###)?\s*PLAN\b|$)/is;
+  const planPattern = /(?:\*\*|###)?\s*PLAN\s*(?:\*\*|:)?\s*\n?([\s\S]*?)$/is;
 
   const subjMatch = text.match(subjPattern);
   const objMatch = text.match(objPattern);
@@ -21,12 +21,17 @@ const parseSoapNote = (text) => {
   if (assMatch) sections.assessment = assMatch[1].trim();
   if (planMatch) sections.plan = planMatch[1].trim();
 
+  // Fallback: If parsing fails to separate sections, place all text in subjective
+  if (!sections.subjective && !sections.objective && !sections.assessment && !sections.plan) {
+    sections.subjective = text;
+  }
+
   return sections;
 };
 
 const contentByLanguage = {
   english: {
-    resultTitle: "SOAP Note Result",
+    resultTitle: "Clinical Note Result",
     resultLabel: "Generated in English",
     titles: {
       subjective: "Subjective",
@@ -42,24 +47,35 @@ const contentByLanguage = {
     },
   },
   hindi: {
-    resultTitle: "\u0938\u094b\u092a \u0928\u094b\u091f",
-    resultLabel:
-      "\u0939\u093f\u0902\u0926\u0940 \u092e\u0947\u0902 \u091c\u0928\u0930\u0947\u091f \u0915\u093f\u092f\u093e \u0917\u092f\u093e",
+    resultTitle: "क्लिनिकल नोट",
+    resultLabel: "हिंदी में जनरेट किया गया",
     titles: {
-      subjective: "\u0938\u092c\u094d\u091c\u0947\u0915\u094d\u091f\u093f\u0935",
-      objective: "\u0911\u092c\u094d\u091c\u0947\u0915\u094d\u091f\u093f\u0935",
-      assessment: "\u0905\u0938\u0947\u0938\u092e\u0947\u0902\u091f",
-      plan: "\u092a\u094d\u0932\u093e\u0928",
+      subjective: "सब्जेक्टिव",
+      objective: "ऑब्जेक्टिव",
+      assessment: "असेसमेंट",
+      plan: "प्लान",
     },
     empty: {
-      subjective:
-        "\u0915\u094b\u0908 \u0938\u092c\u094d\u091c\u0947\u0915\u094d\u091f\u093f\u0935 \u0921\u0947\u091f\u093e \u0928\u0939\u0940\u0902 \u092e\u093f\u0932\u093e",
-      objective:
-        "\u0915\u094b\u0908 \u0911\u092c\u094d\u091c\u0947\u0915\u094d\u091f\u093f\u0935 \u0921\u0947\u091f\u093e \u0928\u0939\u0940\u0902 \u092e\u093f\u0932\u093e",
-      assessment:
-        "\u0915\u094b\u0908 \u0905\u0938\u0947\u0938\u092e\u0947\u0902\u091f \u0921\u0947\u091f\u093e \u0928\u0939\u0940\u0902 \u092e\u093f\u0932\u093e",
-      plan:
-        "\u0915\u094b\u0908 \u092a\u094d\u0932\u093e\u0928 \u0921\u0947\u091f\u093e \u0928\u0939\u0940\u0902 \u092e\u093f\u0932\u093e",
+      subjective: "कोई सब्जेक्टिव डेटा नहीं मिला",
+      objective: "कोई ऑब्जेक्टिव डेटा नहीं मिला",
+      assessment: "कोई असेसमेंट डेटा नहीं मिला",
+      plan: "कोई प्लान डेटा नहीं मिला",
+    },
+  },
+  malayalam: {
+    resultTitle: "ക്ലിനിക്കൽ നോട്ട് ഫലം",
+    resultLabel: "മലയാളത്തിൽ തയാറാക്കിയത്",
+    titles: {
+      subjective: "സബ്ജക്ടീവ്",
+      objective: "ഒബ്ജക്ടീവ്",
+      assessment: "അസസ്മെന്റ്",
+      plan: "പ്ലാൻ",
+    },
+    empty: {
+      subjective: "വിവരങ്ങൾ ലഭ്യമല്ല",
+      objective: "വിവരങ്ങൾ ലഭ്യമല്ല",
+      assessment: "വിവരങ്ങൾ ലഭ്യമല്ല",
+      plan: "വിവരങ്ങൾ ലഭ്യമല്ല",
     },
   },
 };

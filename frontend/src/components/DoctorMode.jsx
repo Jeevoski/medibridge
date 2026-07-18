@@ -46,7 +46,7 @@ export default function DoctorMode() {
     <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '0 1rem' }}>
       <div style={{ backgroundColor: 'white', borderRadius: '0.75rem', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', padding: '2rem', marginBottom: '2rem' }}>
         <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A2463', marginBottom: '0.5rem' }}>
-          Generate SOAP Note
+          Generate Clinical Note
         </h2>
         <p style={{ color: '#4b5563', marginBottom: '1.5rem' }}>
           Speak or type your patient consultation summary
@@ -54,9 +54,6 @@ export default function DoctorMode() {
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div>
-            <label style={{ display: 'block', color: '#374151', fontWeight: '500', marginBottom: '0.5rem' }}>
-              SOAP Note Language
-            </label>
             <LanguageToggle language={language} setLanguage={setLanguage} />
           </div>
 
@@ -106,7 +103,7 @@ export default function DoctorMode() {
               opacity: loading ? 0.5 : 1,
             }}
           >
-            {loading ? "Generating..." : "Generate SOAP Note"}
+            {loading ? "Generating..." : "Generate Clinical Note"}
           </button>
         </form>
       </div>
