@@ -57,10 +57,7 @@ Proof documents, logs, and verification outputs are located in the `/proofs` fol
 ## Screenshots
 Below are screenshots demonstrating the application's interface:
 
-<!-- [Insert Clinical Note Generator Screenshot Here] -->
-<!-- [Insert Prescription Explainer Malayalam Output Screenshot Here] -->
-
-*(Please add screenshot image links in the `/screenshots` folder)*
+https://drive.google.com/file/d/1dZwKfYhkj0cvmeV6gWqHerTjSouh7aCp/view?usp=sharing
 
 ---
 
