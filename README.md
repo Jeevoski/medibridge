@@ -1,16 +1,20 @@
 # Medibridge
 
 ## Problem Statement
-In the modern healthcare landscape, doctors are frequently overwhelmed by administrative burdens, spending up to **30–40% of their time writing clinical notes** rather than interacting directly with patients. On the other side, patients often leave clinics with handwritten prescriptions that are difficult to read, leading to poor treatment adherence and misunderstandings about medication usage, side effects, and warnings. Additionally, language barriers in diverse populations worsen these issues, as medical information is rarely accessible in native dialects like Malayalam or Hindi.
+In the modern healthcare landscape, doctors are frequently overwhelmed by administrative burdens, spending up to **30–40% of their time writing clinical notes** rather than interacting directly with patients. On the other side, patients often leave clinics with handwritten prescriptions that are difficult to read, leading to poor treatment adherence and misunderstandings about medication usage, side effects, and warnings. Additionally, language barriers and illiteracy in diverse populations worsen these issues, as medical information is rarely accessible in native dialects like Malayalam or Hindi or spoken format.
 
-Medibridge solves these twin problems by streamlining clinical note creation for doctors and providing clear, localized, multi-language prescription explanations for patients.
+Medibridge solves these problems by streamlining clinical note creation for doctors and providing clear, localized, multi-language, voice-assisted health services for patients.
 
 ---
 
 ## Project Description
-**Medibridge** is a dual-mode AI healthcare assistant designed to bridge communication gaps in medicine:
+**Medibridge** is a modular, AI-powered community healthcare platform offering six main features:
 1. **Clinical Note Generator (Doctor Mode)**: Translates verbal or typed patient consultation summaries into structured **Clinical Notes** (Subjective, Objective, Assessment, Plan). This automates documentation and saves doctors valuable time.
 2. **Prescription Explainer (Patient Mode)**: Reads uploaded prescription images, identifies the prescribed medicines, and explains their purpose, side effects, and precautions in plain, understandable language.
+3. **Hospital Finder**: Uses interactive OpenStreetMap Leaflet layers to track current location, query nearby hospitals within a 5km radius (via Overpass API), and trace driving route directions (via OSRM API) showing time and distance.
+4. **Voice Assistant**: Speech-to-text voice recognition and text-to-speech audio readout for medicine details—designed specifically to assist illiterate or visually impaired patients in their native languages (Malayalam, Hindi, English).
+5. **Community Health**: Regional healthcare worker directory focused on the **Chengannur area** with clickable phone dial links (`tel:`) and maps coordinates.
+6. **Medical Events**: Live schedule of local diagnostic camps, blood drives, and nutrition drives in the Chengannur region with route directions.
 
 To ensure global and local accessibility, Medibridge supports full translation across **17 major languages**, including Malayalam (മലയാളം), Hindi (हिंदी), Spanish, French, and more.
 
@@ -22,9 +26,11 @@ To ensure global and local accessibility, Medibridge supports full translation a
 - **Google Gemma 4 (`models/gemma-4-31b-it`)**: Main instruction-tuned language and vision model used via the Google Generative Language API.
 
 ### Tech Stack Used
-- **Frontend**: React.js (Vite), CSS
+- **Frontend**: React.js (Vite), CSS (Tailwind)
 - **Backend**: Node.js, Express.js
 - **Voice Recognition**: Web Speech API (native browser-based speech-to-text)
+- **Speech Output**: Web Speech Synthesis API (text-to-speech)
+- **Map & Routing**: OpenStreetMap, Leaflet.js, Overpass API, OSRM API
 - **PDF Generation**: jsPDF
 - **Image Uploads**: Multer
 - **API Communication**: Axios, `@google/generative-ai` SDK
@@ -33,6 +39,7 @@ To ensure global and local accessibility, Medibridge supports full translation a
 Google's Gemma 4 is integrated into the core endpoints of the Medibridge Express backend:
 - **Clinical Note Synthesis**: Gemma 4 takes clinical transcripts, structure instructions, and the doctor's language preference. It reformats the transcript into standard medical sections while translating the text dynamically.
 - **Prescription Vision & Extraction**: Gemma 4's multimodal capabilities are used to analyze uploaded prescription images, extract the medicine names, and generate structured explanations in the selected language.
+- **Voice Medicine Finder API**: Gemma 4 powers the voice medicine assistant search. When a patient speaks the medicine name, Gemma 4 is queried to summarize the medicine's usage, side effects, and warnings in the patient's language.
 - **Thought / Reasoning Cleanup**: A custom regex parser strips out Gemma 4's internal thinking traces (`<think>...</think>`) before returning the final response to ensure a clean user interface.
 
 ---
