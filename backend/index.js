@@ -503,6 +503,95 @@ Prescription Image Analysis:`;
   }
 });
 
+// POST /find-medicine - Find information about a specific medicine spoken or typed
+app.post("/find-medicine", async (req, res) => {
+  try {
+    const { query, language } = req.body;
+    if (!query) {
+      return res.status(400).json({ error: "Medicine query is required" });
+    }
+
+    const lang = (language || "english").toLowerCase();
+    const isMock = !GEMINI_API_KEY || GEMINI_API_KEY.includes("your_google_ai_studio") || GEMINI_API_KEY === "mock";
+    
+    if (isMock) {
+      console.warn("⚠️ GEMINI_API_KEY is not configured. Running in Mock Mode for Medicine Finder.");
+      // Return a nice mock info depending on the query and language
+      const lowQuery = query.toLowerCase();
+      let medName = query;
+      let usedFor = "Used to treat symptoms.";
+      let sideEffects = "No serious side effects reported.";
+      let warnings = "Consult a physician before use.";
+
+      if (lowQuery.includes("para") || lowQuery.includes("pala") || lowQuery.includes("പനി")) {
+        medName = "Paracetamol (പാരസിറ്റമോൾ)";
+        if (lang.includes("malayalam") || lang.includes("മലയാളം")) {
+          usedFor = "പനിയും ശരീരവേദനയും കുറയ്ക്കാൻ ഉപയോഗിക്കുന്നു.";
+          sideEffects = "നിർദ്ദേശിച്ച അളവിൽ കഴിച്ചാൽ പാർശ്വഫലങ്ങൾ വളരെ കുറവാണ്.";
+          warnings = "24 മണിക്കൂറിൽ 4 ഗ്രാമിൽ കൂടുതൽ കഴിക്കരുത്. കരളിനെ ബാധിച്ചേക്കാം.";
+        } else {
+          usedFor = "Used for pain relief and fever reduction.";
+          sideEffects = "Minimal side effects when taken at normal doses.";
+          warnings = "Do not exceed 4g in 24 hours. Avoid alcohol.";
+        }
+      } else if (lowQuery.includes("amox") || lowQuery.includes("അമോക്")) {
+        medName = "Amoxicillin (അമോക്സിസില്ലിൻ)";
+        if (lang.includes("malayalam") || lang.includes("മലയാളം")) {
+          usedFor = "ബാക്ടീരിയൽ അണുബാധകൾക്ക് (തൊണ്ടവേദന, ചെവിയിലെ അണുബാധ) ഉപയോഗിക്കുന്നു.";
+          sideEffects = "വയറിളക്കം, ഓക്കാനം, അലർജി.";
+          warnings = "പെൻസിലിൻ അലർജിയുള്ളവർ കഴിക്കരുത്. കോഴ്സ് പൂർത്തിയാക്കുക.";
+        } else {
+          usedFor = "Used for bacterial infections.";
+          sideEffects = "Diarrhea, nausea, allergic skin rash.";
+          warnings = "Do not take if allergic to penicillin. Complete the full course.";
+        }
+      }
+
+      return res.json({
+        medicine: medName,
+        usedFor,
+        sideEffects,
+        warnings,
+        isMock: true
+      });
+    }
+
+    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+    
+    const prompt = `You are a pharmacist. Explain this medicine: "${query}" in ${lang}.
+    
+    Provide the details in this exact format:
+    MEDICINE: [Clean Medicine Name]
+    USED_FOR: [What it is used for in ${lang}]
+    SIDE_EFFECTS: [Common side effects in ${lang}]
+    WARNINGS: [Warnings and precautions in ${lang}]
+    
+    Do not add extra markdown bolding, introductions, or thoughts. Keep responses short and simple so a text-to-speech engine can read it out clearly.`;
+
+    const result = await model.generateContent(prompt);
+    const rawText = result.response.text() || "";
+    
+    // Parse the output
+    const cleaned = cleanModelResponse(rawText, "rx");
+    
+    const medName = cleaned.match(/MEDICINE:\s*(.*?)(?=USED_FOR:|$)/is);
+    const usedFor = cleaned.match(/USED_FOR:\s*(.*?)(?=SIDE_EFFECTS:|$)/is);
+    const sideEffects = cleaned.match(/SIDE_EFFECTS:\s*(.*?)(?=WARNINGS:|$)/is);
+    const warnings = cleaned.match(/WARNINGS:\s*(.*?)$/is);
+
+    res.json({
+      medicine: medName ? medName[1].trim() : query,
+      usedFor: usedFor ? usedFor[1].trim() : "Details not found",
+      sideEffects: sideEffects ? sideEffects[1].trim() : "Details not found",
+      warnings: warnings ? warnings[1].trim() : "Details not found",
+      isMock: false
+    });
+  } catch (error) {
+    console.error("Error finding medicine details:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // GET /models - list available models from Google Generative Language API
 app.get('/models', async (req, res) => {
   try {

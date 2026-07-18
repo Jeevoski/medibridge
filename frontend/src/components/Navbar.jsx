@@ -12,7 +12,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
           <p style={{ fontSize: '0.875rem', color: '#4b5563' }}>Powered by Gemma 4</p>
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem' }}>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
           <button
             onClick={() => setActiveTab("doctor")}
             style={{
@@ -40,6 +40,34 @@ export default function Navbar({ activeTab, setActiveTab }) {
             }}
           >
             👤 Patient Mode
+          </button>
+          <button
+            onClick={() => setActiveTab("map")}
+            style={{
+              padding: '0.5rem 1.5rem',
+              borderRadius: '0.5rem',
+              fontWeight: '500',
+              backgroundColor: activeTab === "map" ? '#0A2463' : 'transparent',
+              color: activeTab === "map" ? 'white' : '#374151',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            🏥 Hospital Finder
+          </button>
+          <button
+            onClick={() => setActiveTab("voice-assist")}
+            style={{
+              padding: '0.5rem 1.5rem',
+              borderRadius: '0.5rem',
+              fontWeight: '500',
+              backgroundColor: activeTab === "voice-assist" ? '#0A2463' : 'transparent',
+              color: activeTab === "voice-assist" ? 'white' : '#374151',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            🎙️ Voice Assistant
           </button>
         </div>
       </div>
