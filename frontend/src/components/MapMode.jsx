@@ -122,25 +122,27 @@ export default function MapMode() {
       setHospitals(parsedHospitals);
 
       // Add Hospital markers to map
-      parsedHospitals.forEach((hosp) => {
-        const hospIcon = L.divIcon({
-          className: 'hospital-marker-icon',
-          html: `<div style="background-color: #ef4444; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); font-size: 14px;">🏥</div>`,
-          iconSize: [26, 26],
-          iconAnchor: [13, 13]
+      if (mapInstanceRef.current) {
+        parsedHospitals.forEach((hosp) => {
+          const hospIcon = L.divIcon({
+            className: 'hospital-marker-icon',
+            html: `<div style="background-color: #ef4444; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); font-size: 14px;">🏥</div>`,
+            iconSize: [26, 26],
+            iconAnchor: [13, 13]
+          });
+
+          const marker = L.marker([hosp.lat, hosp.lon], { icon: hospIcon })
+            .addTo(mapInstanceRef.current)
+            .bindPopup(`<b>${hosp.name}</b><br/>Distance: ${hosp.distance} km`);
+
+          marker.on('click', () => {
+            setSelectedHospital(hosp);
+            drawRoute(hosp);
+          });
+
+          markersRef.current[hosp.id] = marker;
         });
-
-        const marker = L.marker([hosp.lat, hosp.lon], { icon: hospIcon })
-          .addTo(mapInstanceRef.current)
-          .bindPopup(`<b>${hosp.name}</b><br/>Distance: ${hosp.distance} km`);
-
-        marker.on('click', () => {
-          setSelectedHospital(hosp);
-          drawRoute(hosp);
-        });
-
-        markersRef.current[hosp.id] = marker;
-      });
+      }
 
     } catch (err) {
       console.error(err);
