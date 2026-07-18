@@ -12,17 +12,21 @@ export default function Navbar({ activeTab, setActiveTab }) {
           <p style={{ fontSize: '0.875rem', color: '#4b5563' }}>Powered by Gemma 4</p>
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', width: '100%' }}>
           <button
             onClick={() => setActiveTab("doctor")}
             style={{
-              padding: '0.5rem 1.5rem',
+              flex: '1',
+              minWidth: '130px',
+              padding: '0.5rem 1rem',
               borderRadius: '0.5rem',
               fontWeight: '500',
               backgroundColor: activeTab === "doctor" ? '#0A2463' : 'transparent',
               color: activeTab === "doctor" ? 'white' : '#374151',
-              border: 'none',
+              border: activeTab === "doctor" ? 'none' : '1px solid #d1d5db',
               cursor: 'pointer',
+              textAlign: 'center',
+              whiteSpace: 'nowrap'
             }}
           >
             Doctor Mode
@@ -30,13 +34,17 @@ export default function Navbar({ activeTab, setActiveTab }) {
           <button
             onClick={() => setActiveTab("patient")}
             style={{
-              padding: '0.5rem 1.5rem',
+              flex: '1',
+              minWidth: '130px',
+              padding: '0.5rem 1rem',
               borderRadius: '0.5rem',
               fontWeight: '500',
               backgroundColor: activeTab === "patient" ? '#0A2463' : 'transparent',
               color: activeTab === "patient" ? 'white' : '#374151',
-              border: 'none',
+              border: activeTab === "patient" ? 'none' : '1px solid #d1d5db',
               cursor: 'pointer',
+              textAlign: 'center',
+              whiteSpace: 'nowrap'
             }}
           >
             Patient Mode
@@ -44,13 +52,17 @@ export default function Navbar({ activeTab, setActiveTab }) {
           <button
             onClick={() => setActiveTab("map")}
             style={{
-              padding: '0.5rem 1.5rem',
+              flex: '1',
+              minWidth: '130px',
+              padding: '0.5rem 1rem',
               borderRadius: '0.5rem',
               fontWeight: '500',
               backgroundColor: activeTab === "map" ? '#0A2463' : 'transparent',
               color: activeTab === "map" ? 'white' : '#374151',
-              border: 'none',
+              border: activeTab === "map" ? 'none' : '1px solid #d1d5db',
               cursor: 'pointer',
+              textAlign: 'center',
+              whiteSpace: 'nowrap'
             }}
           >
             Hospital Finder
@@ -58,13 +70,17 @@ export default function Navbar({ activeTab, setActiveTab }) {
           <button
             onClick={() => setActiveTab("voice-assist")}
             style={{
-              padding: '0.5rem 1.5rem',
+              flex: '1',
+              minWidth: '130px',
+              padding: '0.5rem 1rem',
               borderRadius: '0.5rem',
               fontWeight: '500',
               backgroundColor: activeTab === "voice-assist" ? '#0A2463' : 'transparent',
               color: activeTab === "voice-assist" ? 'white' : '#374151',
-              border: 'none',
+              border: activeTab === "voice-assist" ? 'none' : '1px solid #d1d5db',
               cursor: 'pointer',
+              textAlign: 'center',
+              whiteSpace: 'nowrap'
             }}
           >
             Voice Assistant
@@ -72,16 +88,38 @@ export default function Navbar({ activeTab, setActiveTab }) {
           <button
             onClick={() => setActiveTab("community")}
             style={{
-              padding: '0.5rem 1.5rem',
+              flex: '1',
+              minWidth: '130px',
+              padding: '0.5rem 1rem',
               borderRadius: '0.5rem',
               fontWeight: '500',
               backgroundColor: activeTab === "community" ? '#0A2463' : 'transparent',
               color: activeTab === "community" ? 'white' : '#374151',
-              border: 'none',
+              border: activeTab === "community" ? 'none' : '1px solid #d1d5db',
               cursor: 'pointer',
+              textAlign: 'center',
+              whiteSpace: 'nowrap'
             }}
           >
             Community Health
+          </button>
+          <button
+            onClick={() => setActiveTab("events")}
+            style={{
+              flex: '1',
+              minWidth: '130px',
+              padding: '0.5rem 1rem',
+              borderRadius: '0.5rem',
+              fontWeight: '500',
+              backgroundColor: activeTab === "events" ? '#0A2463' : 'transparent',
+              color: activeTab === "events" ? 'white' : '#374151',
+              border: activeTab === "events" ? 'none' : '1px solid #d1d5db',
+              cursor: 'pointer',
+              textAlign: 'center',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            Medical Events
           </button>
         </div>
       </div>

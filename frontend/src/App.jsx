@@ -5,6 +5,7 @@ import PatientMode from './components/PatientMode'
 import MapMode from './components/MapMode'
 import VoiceAssistMode from './components/VoiceAssistMode'
 import CommunityMode from './components/CommunityMode'
+import EventsMode from './components/EventsMode'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('doctor')
@@ -18,6 +19,7 @@ export default function App() {
         {activeTab === 'map' && <MapMode />}
         {activeTab === 'voice-assist' && <VoiceAssistMode />}
         {activeTab === 'community' && <CommunityMode />}
+        {activeTab === 'events' && <EventsMode />}
       </main>
     </div>
   )
