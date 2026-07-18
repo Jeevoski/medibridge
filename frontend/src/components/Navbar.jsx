@@ -25,7 +25,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
               cursor: 'pointer',
             }}
           >
-            👨‍⚕️ Doctor Mode
+            Doctor Mode
           </button>
           <button
             onClick={() => setActiveTab("patient")}
@@ -39,7 +39,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
               cursor: 'pointer',
             }}
           >
-            👤 Patient Mode
+            Patient Mode
           </button>
           <button
             onClick={() => setActiveTab("map")}
@@ -53,7 +53,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
               cursor: 'pointer',
             }}
           >
-            🏥 Hospital Finder
+            Hospital Finder
           </button>
           <button
             onClick={() => setActiveTab("voice-assist")}
@@ -67,7 +67,21 @@ export default function Navbar({ activeTab, setActiveTab }) {
               cursor: 'pointer',
             }}
           >
-            🎙️ Voice Assistant
+            Voice Assistant
+          </button>
+          <button
+            onClick={() => setActiveTab("community")}
+            style={{
+              padding: '0.5rem 1.5rem',
+              borderRadius: '0.5rem',
+              fontWeight: '500',
+              backgroundColor: activeTab === "community" ? '#0A2463' : 'transparent',
+              color: activeTab === "community" ? 'white' : '#374151',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Community Health
           </button>
         </div>
       </div>
