@@ -58,6 +58,7 @@ Proof documents, logs, and verification outputs are located in the `/proofs` fol
 Below are screenshots demonstrating the application's interface:
 
 https://drive.google.com/file/d/1dZwKfYhkj0cvmeV6gWqHerTjSouh7aCp/view?usp=sharing
+https://drive.google.com/file/d/1nd8qMxhq_kUSAlJyxHLUKpTLBGsPTlpS/view?usp=sharing
 
 ---
 
